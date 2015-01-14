@@ -6,7 +6,7 @@ public class NaukaClass {
 	static public void main(String[] args){
 		
 	 GameOfLife game = new GameOfLife();
-	 game.
+	 game.lifeCycle();
 	}
 }
 
@@ -34,7 +34,7 @@ class GameOfLife{
 					}
 		}
 	
-	private void lifeCycle(){
+	public void lifeCycle(){
 	
 		for(int i =1;i<=ROW-2;i++){
 			for(int j=1;j<COL-2;j++){
@@ -42,22 +42,22 @@ class GameOfLife{
 					
 					if(numberOfPartners(i, j)==3 || numberOfPartners(i, j)==2){
 						gameTableOfValues2[i][j]=true;
-						//System.out.print("1");
+						viewOfSymbol(i, j);
 					}
 					else if(numberOfPartners(i, j)<2){
 						gameTableOfValues2[i][j]=false;
-					//	System.out.print("0");
+						viewOfSymbol(i, j);
 					}
 					else if(numberOfPartners(i, j)>4){
 						gameTableOfValues2[i][j]=false;
-					//	System.out.print("0");
+					    viewOfSymbol(i, j);
 					}
 					
 				}
 				else if(gameTableOfValues[i][j]==false){
 					if(numberOfPartners(i, j)==3){
 						gameTableOfValues2[i][j]=true;
-					//	System.out.print("1");
+					    viewOfSymbol(i, j);
 					}
 				}
 				
@@ -84,9 +84,8 @@ class GameOfLife{
      	return numberOfPartners;
 	}
 	
-	public void viewOfSymbol(int i , int j ){
-		
+	private void viewOfSymbol(int i , int j ){
+		if(gameTableOfValues2[i][j]==true) System.out.print("1");
+		if(gameTableOfValues2[i][j]==false)System.out.print("0");
 	}
 }
-
-chuj kurwa-.-
