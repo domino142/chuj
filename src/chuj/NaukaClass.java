@@ -4,10 +4,18 @@ import java.util.Random;
 
 public class NaukaClass {
 
-	static public void main(String[] args){
-		
+	static public void main(String[] args) throws InterruptedException{
+	 int cycles=10; //iloœæ cykli ¿ycia
+	 
 	 GameOfLife game = new GameOfLife();
+	 do {
+	 cycles-=1;
 	 game.lifeCycle();
+	 System.out.print("\n\n\n\n"); //odstêp :P
+	 Thread.sleep(300); // opóŸnienie w wypisywaniu
+	 game.printTable();
+	 } while (cycles>0);
+	 
 	}
 }
 
@@ -16,8 +24,8 @@ class GameOfLife{
 	
 	private final int COL = 12;
 	private final int ROW = 12;
-	private boolean gameTableOfValues [][];
-	private boolean gameTableOfValues2 [][];
+	public boolean gameTableOfValues [][];
+	public boolean gameTableOfValues2 [][];
     private Random randOfValues;
 	private int numberOfPartners;
 
@@ -43,22 +51,22 @@ class GameOfLife{
 					
 					if(numberOfPartners(i, j)==3 || numberOfPartners(i, j)==2){
 						gameTableOfValues2[i][j]=true;
-						viewOfSymbol(i, j);
+						//viewOfSymbol(i, j);
 					}
 					else if(numberOfPartners(i, j)<2){
 						gameTableOfValues2[i][j]=false;
-						viewOfSymbol(i, j);
+						//viewOfSymbol(i, j);
 					}
 					else if(numberOfPartners(i, j)>4){
 						gameTableOfValues2[i][j]=false;
-					    viewOfSymbol(i, j);
+					    //viewOfSymbol(i, j);
 					}
 					
 				}
 				else if(gameTableOfValues[i][j]==false){
 					if(numberOfPartners(i, j)==3){
 						gameTableOfValues2[i][j]=true;
-					    viewOfSymbol(i, j);
+					   // viewOfSymbol(i, j);
 					}
 				}
 				
@@ -84,9 +92,19 @@ class GameOfLife{
          if(gameTableOfValues[x+1][y+1]==true)numberOfPartners++;
      	return numberOfPartners;
 	}
-	
-	private void viewOfSymbol(int i , int j ){
+	public void printTable()
+	{
+		for(int i =1;i<=ROW-2;i++){
+			for(int j=1;j<COL-2;j++)
+			{
+				if(gameTableOfValues[i][j]==true) System.out.print("1");
+				if(gameTableOfValues[i][j]==false)System.out.print("0");
+			}
+		System.out.println("");}
+		
+	}
+	/*private void viewOfSymbol(int i , int j ){
 		if(gameTableOfValues2[i][j]==true) System.out.print("1");
 		if(gameTableOfValues2[i][j]==false)System.out.print("0");
-	}
+	}*/
 }
